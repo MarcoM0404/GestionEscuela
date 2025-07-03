@@ -4,7 +4,6 @@ import com.capacitacion.gestion_cursos.model.*;
 import com.capacitacion.gestion_cursos.service.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.notification.Notification;
@@ -98,7 +97,7 @@ public class AdminStudentsView extends VerticalLayout {
         TextField     email     = new TextField("Email");
         TextField     phone     = new TextField("Teléfono");
         TextField     username  = new TextField("Username");
-        PasswordField password  = new PasswordField("Password (solo si cambias)");
+        PasswordField password  = new PasswordField("Password");
         TextField     street    = new TextField("Calle");
         TextField     city      = new TextField("Ciudad");
         TextField     state     = new TextField("Provincia");

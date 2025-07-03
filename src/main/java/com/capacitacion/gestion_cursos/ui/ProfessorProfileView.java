@@ -1,4 +1,3 @@
-// src/main/java/com/capacitacion/gestion_cursos/ui/ProfessorProfileView.java
 package com.capacitacion.gestion_cursos.ui;
 
 import com.capacitacion.gestion_cursos.model.Address;

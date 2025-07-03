@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface SeatRepository extends JpaRepository<Seat, Long> {
-    // Trae todas las inscripciones (Seat) donde student.user.id = :userId
+
     @Query("SELECT s FROM Seat s WHERE s.student.user.id = :userId")
     List<Seat> findByStudentUserId(@Param("userId") Long userId);
     List<Seat> findByStudentNameContainingIgnoreCase(String name);

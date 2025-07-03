@@ -30,9 +30,7 @@ import java.util.OptionalDouble;
 @Route(value = "professor", layout = MainLayout.class)
 public class ProfessorView extends VerticalLayout {
 
-    private final ProfessorService profService;
     private final StudentService   studentService;
-    private final CourseService    courseService;
     private final SeatService      seatService;
 
     private final Grid<Course> courseGrid = new Grid<>(Course.class, false);
@@ -42,12 +40,10 @@ public class ProfessorView extends VerticalLayout {
                          StudentService studentService,
                          CourseService courseService,
                          SeatService seatService) {
-        this.profService    = profService;
         this.studentService = studentService;
-        this.courseService  = courseService;
         this.seatService    = seatService;
 
-        // Control de acceso: solo PROFESOR
+
         User u = VaadinSession.getCurrent().getAttribute(User.class);
         if (u == null || u.getRole() != Role.PROFESSOR) {
             UI.getCurrent().navigate("login");
@@ -56,7 +52,7 @@ public class ProfessorView extends VerticalLayout {
 
         setSizeFull();
 
-        // Cabecera con saludo y acceso al perfil
+
         add(
           new H2("👨‍🏫 Bienvenido, " + u.getUsername()),
           new Button("✏️ Mi Perfil", e ->
@@ -64,7 +60,7 @@ public class ProfessorView extends VerticalLayout {
           )
         );
 
-        // Configuración de columnas
+
         courseGrid.addColumn(Course::getId)
                   .setHeader("ID")
                   .setWidth("70px");
@@ -72,12 +68,12 @@ public class ProfessorView extends VerticalLayout {
                   .setHeader("Curso")
                   .setAutoWidth(true);
 
-        // FEATURE: número de alumnos inscritos
+
         courseGrid.addColumn(c ->
             seatService.findByCourseId(c.getId()).size()
         ).setHeader("Inscritos").setAutoWidth(true);
 
-        // FEATURE: promedio de notas del curso
+
         courseGrid.addColumn(c -> {
             OptionalDouble avgOpt = seatService.findByCourseId(c.getId()).stream()
                 .mapToDouble(s -> s.getMark() != null ? s.getMark() : 0.0)
@@ -87,7 +83,7 @@ public class ProfessorView extends VerticalLayout {
                 : "—";
         }).setHeader("Prom. Nota").setAutoWidth(true);
 
-        // Selección de curso abre diálogo
+
         courseGrid.asSingleSelect().addValueChangeListener(evt -> {
             if (evt.getValue() != null) {
                 openEnrollmentDialog(evt.getValue());
@@ -97,7 +93,7 @@ public class ProfessorView extends VerticalLayout {
         courseGrid.setSizeFull();
         add(new H2("📋 Mis Cursos"), courseGrid);
 
-        // Carga inicial de cursos del profesor
+
         Long profId = profService.findByUserId(u.getId())
                                  .map(p -> p.getId())
                                  .orElse(-1L);
@@ -109,7 +105,7 @@ public class ProfessorView extends VerticalLayout {
         dialog.setWidth("700px");
         dialog.add(new H2("📝 Inscripciones: " + course.getName()));
 
-        // Toolbar para inscribir alumnos
+
         Select<Student> studentSelect = new Select<>();
         studentSelect.setLabel("Alumno");
         studentSelect.setItems(studentService.findAll());
@@ -135,8 +131,10 @@ public class ProfessorView extends VerticalLayout {
         HorizontalLayout toolbar = new HorizontalLayout(
             studentSelect, inscDate, enrollBtn
         );
-
-        // Grid de inscripciones
+        
+        
+        //ver tema del grid!!!!!
+        
         Grid<Seat> seatGrid = new Grid<>(Seat.class, false);
         seatGrid.addColumn(Seat::getId).setHeader("ID").setWidth("50px");
         seatGrid.addColumn(s -> s.getStudent().getName()).setHeader("Alumno").setAutoWidth(true);
@@ -144,7 +142,7 @@ public class ProfessorView extends VerticalLayout {
         seatGrid.addColumn(Seat::getEvaluationDate).setHeader("Evaluación");
         seatGrid.addColumn(Seat::getMark).setHeader("Nota");
 
-        // Botón para quitar inscripción
+
         seatGrid.addComponentColumn(seat -> {
             Button del = new Button("🗑️", ev -> {
                 seatService.deleteById(seat.getId());
@@ -153,7 +151,7 @@ public class ProfessorView extends VerticalLayout {
             return del;
         }).setHeader("Quitar");
 
-        // Doble clic para editar nota y fecha evaluación
+
         seatGrid.asSingleSelect().addValueChangeListener(evt -> {
             if (evt.getValue() != null) {
                 openEditSeatDialog(evt.getValue(), seatGrid);

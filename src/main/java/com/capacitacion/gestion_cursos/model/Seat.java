@@ -10,11 +10,11 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Fecha de inscripción
+
     private LocalDate year;
     private LocalDate evaluationDate;
 
-    // Nota (puede ser null si aún no la pusiste)
+
     private Double mark;
 
     @ManyToOne
@@ -24,7 +24,6 @@ public class Seat {
     private Student student;
     	
 
-    // --- getters y setters ---
 
     public Long getId() {
         return id;

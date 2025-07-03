@@ -1,4 +1,4 @@
-// src/main/java/com/capacitacion/gestion_cursos/repository/CourseRepository.java
+
 package com.capacitacion.gestion_cursos.repository;
 
 import com.capacitacion.gestion_cursos.model.Course;

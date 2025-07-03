@@ -1,4 +1,3 @@
-// src/main/java/com/capacitacion/gestion_cursos/model/Address.java
 package com.capacitacion.gestion_cursos.model;
 
 import jakarta.persistence.*;
@@ -32,7 +31,7 @@ public class Address {
         this.country = country;
     }
 
-    // —— Getters & Setters —— //
+
 
     public Long getId() {
         return id;

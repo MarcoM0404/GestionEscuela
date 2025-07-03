@@ -30,7 +30,7 @@ public class AdminCoursesView extends VerticalLayout {
         this.courseService = courseService;
         this.profService   = profService;
 
-        // Control de acceso
+
         User u = VaadinSession.getCurrent().getAttribute(User.class);
         if (u == null || u.getRole() != Role.ADMIN) {
             getUI().ifPresent(ui -> ui.navigate("login"));

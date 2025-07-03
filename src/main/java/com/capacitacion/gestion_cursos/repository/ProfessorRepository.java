@@ -1,4 +1,3 @@
-// src/main/java/com/capacitacion/gestion_cursos/repository/ProfessorRepository.java
 package com.capacitacion.gestion_cursos.repository;
 
 import com.capacitacion.gestion_cursos.model.Professor;

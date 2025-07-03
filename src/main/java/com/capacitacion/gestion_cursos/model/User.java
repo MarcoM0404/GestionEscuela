@@ -1,4 +1,3 @@
-// src/main/java/com/capacitacion/gestion_cursos/model/User.java
 package com.capacitacion.gestion_cursos.model;
 
 import jakarta.persistence.*;
@@ -21,7 +20,7 @@ public class User {
     @Column(nullable = false, length = 20)
     private Role role;
 
-    // Relación uno-a-uno con Person (a definir luego)
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Person person;
 
@@ -33,7 +32,7 @@ public class User {
         this.role = role;
     }
 
-    // —— Getters & Setters —— //
+
 
     public Long getId() {
         return id;

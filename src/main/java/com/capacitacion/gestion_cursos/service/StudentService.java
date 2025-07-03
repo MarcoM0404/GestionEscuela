@@ -15,14 +15,13 @@ public class StudentService {
         this.repo = repo;
     }
 
-    /**
-     * Usa el método del repositorio para buscar por nombre (contenga, ignorando mayúsculas).
-     */
+
+
     public List<Student> findByNameContainingIgnoreCase(String name) {
         return repo.findByNameContainingIgnoreCase(name);
     }
 
-    /** Ya tenías estos métodos para el “Panel Inscripciones” y demás */
+
     public Optional<Student> findByUserId(Long userId) {
         return repo.findByUserId(userId);
     }

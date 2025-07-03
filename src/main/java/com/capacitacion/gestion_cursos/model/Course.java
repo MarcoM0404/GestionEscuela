@@ -1,4 +1,3 @@
-// src/main/java/com/capacitacion/gestion_cursos/model/Course.java
 package com.capacitacion.gestion_cursos.model;
 
 import jakarta.persistence.*;
@@ -16,12 +15,12 @@ public class Course {
     @Column(nullable = false, length = 100)
     private String name;
 
-    // Cada curso lo dicta un único profesor
+    
     @ManyToOne
     @JoinColumn(name = "professor_id", nullable = false)
     private Professor professor;
 
-    // Lista de inscripciones (seats) al curso
+    
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Seat> seats = new ArrayList<>();
 
@@ -32,7 +31,7 @@ public class Course {
         this.professor = professor;
     }
 
-    // —— Getters & Setters —— //
+    
 
     public Long getId() {
         return id;

@@ -35,7 +35,7 @@ public class StudentProfileView extends VerticalLayout {
         this.personService   = personService;
         this.addressService  = addressService;
 
-        // Control de acceso: sólo STUDENT
+
         User u = VaadinSession.getCurrent().getAttribute(User.class);
         if (u == null || u.getRole() != Role.STUDENT) {
             UI.getCurrent().navigate("login");
@@ -45,9 +45,9 @@ public class StudentProfileView extends VerticalLayout {
         setSizeFull();
         add(new H2("👤 Mi Perfil de Alumno"));
 
-        // Creamos el formulario sólo si existe un Student vinculado
+
         studentService.findByUserId(u.getId()).ifPresentOrElse(student -> {
-            // Si no tiene address, lo inicializamos
+
             if (student.getAddress() == null) {
                 student.setAddress(new Address());
             }
@@ -99,9 +99,9 @@ public class StudentProfileView extends VerticalLayout {
             add(form, save);
 
         }, () -> {
-            // Si no hay Student creado aún
+
             Notification.show("Aún no tienes perfil de alumno. Contacta al administrador.", 3000, Notification.Position.MIDDLE);
-            UI.getCurrent().navigate(""); // o la pantalla que prefieras
+            UI.getCurrent().navigate(""); 
         });
     }
 }

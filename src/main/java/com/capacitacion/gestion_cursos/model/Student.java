@@ -16,18 +16,18 @@ public class Student extends Person {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Seat> seats = new ArrayList<>();
 
-    // <-- constructor sin argumentos que faltaba
+
     public Student() {
-        super();  // invoca al constructor de Person
+        super();  
     }
 
-    // tu constructor existente
+
     public Student(UUID studentNumber, Double avgMark) {
         this.studentNumber = studentNumber;
         this.avgMark       = avgMark;
     }
 
-    // getters y setters...
+
 
     public UUID getStudentNumber() {
         return studentNumber;

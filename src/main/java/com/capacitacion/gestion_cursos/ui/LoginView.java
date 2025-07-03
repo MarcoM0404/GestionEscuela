@@ -17,15 +17,15 @@ public class LoginView extends VerticalLayout {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    // Aquí recibe también el PasswordEncoder
+
     public LoginView(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService      = userService;
         this.passwordEncoder  = passwordEncoder;
 
         setSizeFull();
-        // Centrado vertical
+
         setJustifyContentMode(JustifyContentMode.CENTER);
-        // Centrado horizontal
+
         setAlignItems(Alignment.CENTER);
         LoginForm loginForm = new LoginForm();
         loginForm.addLoginListener(e -> {
@@ -33,7 +33,7 @@ public class LoginView extends VerticalLayout {
             String rawPass  = e.getPassword();
             User user       = userService.findByUsername(username);
 
-            // Ahora usamos passwordEncoder.matches()
+
             if (user != null && passwordEncoder.matches(rawPass, user.getPassword())) {
                 VaadinSession.getCurrent().setAttribute(User.class, user);
                 switch (user.getRole()) {

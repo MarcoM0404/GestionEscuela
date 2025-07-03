@@ -1,4 +1,3 @@
-// PersonService.java
 package com.capacitacion.gestion_cursos.service;
 
 import com.capacitacion.gestion_cursos.model.Person;

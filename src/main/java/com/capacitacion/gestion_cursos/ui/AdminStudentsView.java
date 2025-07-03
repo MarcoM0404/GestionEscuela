@@ -41,7 +41,7 @@ public class AdminStudentsView extends VerticalLayout {
         this.userService    = userService;
         this.passwordEncoder = passwordEncoder;
 
-        // Control de acceso: solo ADMIN
+
         User u = VaadinSession.getCurrent().getAttribute(User.class);
         if (u == null || u.getRole() != Role.ADMIN) {
             getUI().ifPresent(ui -> ui.navigate("login"));
@@ -75,19 +75,18 @@ public class AdminStudentsView extends VerticalLayout {
     }
 
     private void openEditor(Student student) {
-        // Inicializar subobjetos si son null
+
         if (student.getAddress() == null) {
             student.setAddress(new Address());
         }
         if (student.getUser() == null) {
             student.setUser(new User());
         }
-        // ←–––––––––––––––––––––––––––––––––––––––––––––––––
-        // ** Generar matrícula si aún no existe **
+
         if (student.getStudentNumber() == null) {
             student.setStudentNumber(UUID.randomUUID());
         }
-        // –––––––––––––––––––––––––––––––––––––––––––––––––→
+
 
         Dialog dialog = new Dialog();
         dialog.setWidth("400px");
@@ -124,7 +123,7 @@ public class AdminStudentsView extends VerticalLayout {
               .bind(s -> s.getAddress().getCountry(),
                     (s, v) -> s.getAddress().setCountry(v));
 
-        // Binder para username en la entidad User
+
         binder.forField(username)
               .asRequired("Requerido")
               .bind(s -> s.getUser().getUsername(),
@@ -134,7 +133,7 @@ public class AdminStudentsView extends VerticalLayout {
 
         Button save = new Button("Guardar", ev -> {
             if (binder.writeBeanIfValid(student)) {
-                // Actualizar/crear User
+
                 User u2 = student.getUser();
                 u2.setRole(Role.STUDENT);
                 if (!password.getValue().isBlank()) {
@@ -142,7 +141,7 @@ public class AdminStudentsView extends VerticalLayout {
                 }
                 userService.save(u2);
 
-                // Guardar direccion, persona y student
+
                 addressService.save(student.getAddress());
                 personService.save(student);
                 studentService.save(student);

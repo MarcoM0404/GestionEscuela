@@ -75,6 +75,6 @@ public abstract class Person {
 		this.user = user;
 	}
 
-    // getters & setters...
+  
     
 }
